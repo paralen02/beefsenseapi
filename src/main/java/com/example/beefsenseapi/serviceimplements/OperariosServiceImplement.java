@@ -34,4 +34,9 @@ public class OperariosServiceImplement implements IOperariosService {
     public List<Operarios> list() {
         return myRepository.findAll();
     }
+
+    @Override
+    public Operarios findByUsername(String username) {
+        return myRepository.findByUsername(username);
+    }
 }

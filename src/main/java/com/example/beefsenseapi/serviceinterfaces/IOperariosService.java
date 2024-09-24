@@ -7,4 +7,5 @@ public interface IOperariosService {
     void delete(int id);
     Operarios listId(int id);
     List<Operarios> list();
+    Operarios findByUsername(String username);
 }
