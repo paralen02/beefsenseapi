@@ -17,8 +17,8 @@ FROM amazoncorretto:17-alpine AS runtime
 # Create the application directory
 WORKDIR /app
 
-# Copy the JAR file into the container's working directory
-COPY target/beefsenseapi-0.0.1-SNAPSHOT.jar /app/app.jar
+# Copy the JAR file from the build stage
+COPY --from=build /app/target/beefsenseapi-0.0.1-SNAPSHOT.jar /app/app.jar
 
 # Create the directories that Spring Boot is looking for
 RUN mkdir -p /app/src/main/resources
