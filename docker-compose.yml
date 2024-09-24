@@ -1,0 +1,28 @@
+services:
+  beefsenseapi:
+    image: beefsenseapi:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://cloudsql-proxy:5432/beefsense-db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=3U`gL89QQXMMQ:]~
+      - SPRING_CLOUD_GCP_PROJECT_ID=beefsenseapp
+      - SPRING_CLOUD_GCP_SQL_DATABASE_NAME=beefsense-db
+      - SPRING_CLOUD_GCP_SQL_INSTANCE_CONNECTION_NAME=beefsenseapp:southamerica-west1:beefsense-db
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/config/beefsenseapp-f1d007644db8.json
+    depends_on:
+      - cloudsql-proxy
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./src/main/resources/beefsenseapp-f1d007644db8.json:/app/config/beefsenseapp-f1d007644db8.json
+
+  cloudsql-proxy:
+    image: gcr.io/cloudsql-docker/gce-proxy:latest
+    volumes:
+      - ./src/main/resources/beefsenseapp-f1d007644db8.json:/config/beefsenseapp-f1d007644db8.json
+    command: /cloud_sql_proxy -instances=beefsenseapp:southamerica-west1:beefsense-db=tcp:5432 -credential_file=/config/beefsenseapp-f1d007644db8.json
+    expose:
+      - "5432"
