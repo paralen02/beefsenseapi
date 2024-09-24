@@ -25,19 +25,17 @@ public class TensorFlowService {
     public TensorFlowService() {
         try {
             // Load the TensorFlow model
-            model = SavedModelBundle.load("C:\\Users\\Enrique\\Downloads\\h5tosaved\\saved3", "serve");
-
-            // Print all operation names in the graph
-//            model.graph().operations().forEachRemaining(op -> System.out.println(op.name()));
+            model = SavedModelBundle.load("./src/main/resources/saved3", "serve");
 
             // Load class names
-            classNames = loadClassNames("C:\\Users\\Enrique\\Downloads\\h5tosaved\\saved3\\labels.txt"); // Adjust path as necessary
+            classNames = loadClassNames("./src/main/resources/saved3/labels.txt");
 
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Failed to load TensorFlow model or labels", e);
             throw new RuntimeException("Failed to load TensorFlow model or labels", e);
         }
     }
+
 
     public String predict(MultipartFile file) throws IOException {
         // Convert the uploaded image to a BufferedImage
