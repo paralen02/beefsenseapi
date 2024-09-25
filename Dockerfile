@@ -29,9 +29,6 @@ RUN mkdir -p /app/src/main/resources/saved3/1
 # Copy the TensorFlow model and labels to the specific path that Spring Boot expects
 COPY src/main/resources/saved3/1 /app/src/main/resources/saved3/1/
 
-# Verify that the files are copied correctly
-RUN ls -l /app/src/main/resources/saved3/1
-
 # Copy the service account credentials to the specific path that Spring Boot expects
 COPY src/main/resources/beefsenseapp-f1d007644db8.json /app/src/main/resources/beefsenseapp-f1d007644db8.json
 
