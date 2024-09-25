@@ -25,18 +25,17 @@ public class TensorFlowService {
     public TensorFlowService() {
         try {
             logger.info("Loading TensorFlow model...");
-            model = SavedModelBundle.load("file:/app/src/main/resources/saved3/1", "serve");
+            model = SavedModelBundle.load("/app/src/main/resources/saved3/1", "serve");
             logger.info("TensorFlow model loaded successfully.");
-
+    
             logger.info("Loading class names...");
-            classNames = loadClassNames("file:/app/src/main/resources/saved3/1/labels.txt");
+            classNames = loadClassNames("/app/src/main/resources/saved3/1/labels.txt");
             logger.info("Class names loaded successfully.");
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Failed to load TensorFlow model or labels", e);
             throw new RuntimeException("Failed to load TensorFlow model or labels", e);
         }
-    }
-
+    }    
 
     public String predict(MultipartFile file) throws IOException {
         // Convert the uploaded image to a BufferedImage
