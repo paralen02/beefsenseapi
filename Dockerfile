@@ -1,5 +1,5 @@
 # Use a Maven image to build the application
-FROM maven:3.9.9-amazoncorretto-17-al2023 AS build
+FROM maven:3.9.9-amazoncorretto-17 AS build
 
 # Set the working directory
 WORKDIR /app
@@ -12,10 +12,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 # Use a minimal base image with Amazon Corretto 17 (OpenJDK)
-FROM amazoncorretto:17-alpine AS runtime
-
-# Install libstdc++ package
-RUN apk add --no-cache libstdc++
+FROM amazoncorretto:17-buster AS runtime
 
 # Create the application directory
 WORKDIR /app
