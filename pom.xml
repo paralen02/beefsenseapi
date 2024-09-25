@@ -53,6 +53,11 @@
 			<version>1.15.0</version>
 		</dependency>
         <dependency>
+            <groupId>org.tensorflow</groupId>
+            <artifactId>libtensorflow_jni</artifactId>
+            <version>1.15.0</version>
+        </dependency>
+        <dependency>
             <groupId>com.google.cloud.sql</groupId>
             <artifactId>postgres-socket-factory</artifactId>
             <version>1.20.1</version>

@@ -14,6 +14,9 @@ RUN mvn clean package -DskipTests
 # Use a minimal base image with Amazon Corretto 17 (OpenJDK)
 FROM amazoncorretto:17-alpine AS runtime
 
+# Install libstdc++ package
+RUN apk add --no-cache libstdc++
+
 # Create the application directory
 WORKDIR /app
 
