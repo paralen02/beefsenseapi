@@ -1,6 +1,7 @@
 package com.example.beefsenseapi.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.example.beefsenseapi.dtos.OperariosDTO;
 import com.example.beefsenseapi.entities.Operarios;
@@ -24,6 +25,7 @@ public class OperariosController {
 
     // Delete an item by ID on table
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id")Integer id){
         myService.delete(id);
     }
@@ -47,6 +49,7 @@ public class OperariosController {
 
     // (Exclusive to controller) Modify values on table
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void modificar(@RequestBody OperariosDTO dto) {
         ModelMapper m = new ModelMapper();
         Operarios d = m.map(dto, Operarios.class);

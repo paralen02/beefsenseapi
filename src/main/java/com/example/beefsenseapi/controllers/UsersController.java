@@ -1,6 +1,7 @@
 package com.example.beefsenseapi.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import com.example.beefsenseapi.dtos.UsersDTO;
 import com.example.beefsenseapi.entities.Users;
@@ -27,6 +28,7 @@ public class UsersController {
 
     // Delete an item by ID on table
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id")Long id){
         myService.delete(id);
     }
