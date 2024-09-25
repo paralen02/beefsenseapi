@@ -11,16 +11,11 @@ COPY src ./src
 # Build the application
 RUN mvn clean package -DskipTests
 
-# Use a minimal base image with Amazon Corretto 17 (OpenJDK)
-FROM amazoncorretto:17-alpine AS runtime
+# Use a minimal Debian-based image with OpenJDK 17
+FROM openjdk:17-slim AS runtime
 
-# Install glibc and libstdc++ packages
-RUN apk add --no-cache libstdc++ \
-    && apk add --no-cache --virtual=.build-dependencies wget ca-certificates \
-    && wget -q -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub \
-    && wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/2.34-r0/glibc-2.34-r0.apk \
-    && apk add glibc-2.34-r0.apk \
-    && apk del .build-dependencies
+# Install necessary packages
+RUN apt-get update && apt-get install -y libstdc++6
 
 # Create the application directory
 WORKDIR /app
