@@ -35,4 +35,9 @@ public class RoleServiceImplement implements IRoleService {
     public List<Role> list() {
         return myRepository.findAll();
     }
+
+    @Override
+    public List<Role> findRolesByUsername(String username) {
+        return myRepository.findRolesByUsername(username);
+    }
 }
