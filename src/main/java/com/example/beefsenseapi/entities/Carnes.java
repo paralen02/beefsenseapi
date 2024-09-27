@@ -23,8 +23,8 @@ private String grasa;
 @Column(name = "imagen")
 private String imagen;
 
-    
-@ManyToOne
+
+@ManyToOne(cascade = CascadeType.ALL)
 @JoinColumn(name = "operarios_id")
 private Operarios operarios_id;
 
