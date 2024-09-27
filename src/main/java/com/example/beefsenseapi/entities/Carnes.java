@@ -5,7 +5,7 @@ import java.time.*;
 @Entity
 @Table(name = "Carnes")
 public class Carnes {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCarnes;

@@ -34,4 +34,11 @@ public class CarnesServiceImplement implements ICarnesService {
     public List<Carnes> list() {
         return myRepository.findAll();
     }
+
+    @Override
+    public void updateImagen(int id, String imagen) {
+        Carnes carnes = myRepository.findById(id).orElseThrow(() -> new RuntimeException("Carnes not found"));
+        carnes.setImagen(imagen);
+        myRepository.save(carnes);
+    }
 }

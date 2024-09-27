@@ -7,4 +7,6 @@ public interface ICarnesService {
     void delete(int id);
     Carnes listId(int id);
     List<Carnes> list();
+    void updateImagen(int id, String imagen); // Add this method
+
 }

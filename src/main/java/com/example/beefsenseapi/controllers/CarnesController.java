@@ -52,4 +52,9 @@ public class CarnesController {
         Carnes d = m.map(dto, Carnes.class);
         myService.insert(d);
     }
+
+    @PatchMapping("/{id}/imagen")
+    public void updateImagen(@PathVariable("id") Integer id, @RequestBody CarnesDTO dto) {
+        myService.updateImagen(id, dto.getImagen());
+    }
 }
