@@ -1,4 +1,5 @@
 package com.example.beefsenseapi.controllers;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

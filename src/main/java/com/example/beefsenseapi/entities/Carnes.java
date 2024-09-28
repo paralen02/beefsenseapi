@@ -20,11 +20,11 @@ private LocalDateTime fecha;
 private String conformacion;
 @Column(name = "grasa")
 private String grasa;
-@Column(name = "imagen")
+@Column(name = "imagen", length = 1024)
 private String imagen;
 
 
-@ManyToOne(cascade = CascadeType.ALL)
+@ManyToOne
 @JoinColumn(name = "operarios_id")
 private Operarios operarios_id;
 

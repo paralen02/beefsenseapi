@@ -4,13 +4,11 @@ import com.example.beefsenseapi.entities.*;
 import java.time.*;
 
 public class OperariosDTO {
-    
+
     private int idOperarios;
     private String nombre;
-private String apellido;
-private String telefono;
-private String turno;
-private Users users_id;
+    private String apellido;
+    private Users users_id;
 
     public int getIdOperarios() {
         return idOperarios;
@@ -21,42 +19,26 @@ private Users users_id;
     }
 
     public String getNombre() {
-    return nombre;
-}
+        return nombre;
+    }
 
-public void setNombre(String nombre) {
-    this.nombre = nombre;
-}
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-public String getApellido() {
-    return apellido;
-}
+    public String getApellido() {
+        return apellido;
+    }
 
-public void setApellido(String apellido) {
-    this.apellido = apellido;
-}
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
-public String getTelefono() {
-    return telefono;
-}
+    public Users getUsers_id() {
+        return users_id;
+    }
 
-public void setTelefono(String telefono) {
-    this.telefono = telefono;
-}
-
-public String getTurno() {
-    return turno;
-}
-
-public void setTurno(String turno) {
-    this.turno = turno;
-}
-
-public Users getUsers_id() {
-    return users_id;
-}
-
-public void setUsers_id(Users users_id) {
-    this.users_id = users_id;
-}
+    public void setUsers_id(Users users_id) {
+        this.users_id = users_id;
+    }
 }

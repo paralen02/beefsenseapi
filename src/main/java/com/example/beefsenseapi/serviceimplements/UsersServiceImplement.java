@@ -17,6 +17,7 @@ public class UsersServiceImplement implements IUsersService {
     public void insert(Users Users) {
         myRepository.save(Users);
     }
+
     @Override
     @Transactional
     public void insertAndAssignRole(Users user, String roleName) {

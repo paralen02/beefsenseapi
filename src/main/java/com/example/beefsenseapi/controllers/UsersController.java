@@ -8,6 +8,7 @@ import com.example.beefsenseapi.entities.Users;
 import com.example.beefsenseapi.security.WebSecurityConfig;
 import com.example.beefsenseapi.serviceinterfaces.IUsersService;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -23,12 +24,11 @@ public class UsersController {
         Users myItem = m.map(dto, Users.class);
         // Encriptar la contraseña del usuario antes de guardarla
         myItem.setPassword(WebSecurityConfig.passwordEncoder().encode(myItem.getPassword()));
-        myService.insertAndAssignRole(myItem, "ESTUDIANTE");
+        myService.insertAndAssignRole(myItem, "OPERARIO");
     }
 
     // Delete an item by ID on table
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id")Long id){
         myService.delete(id);
     }
@@ -70,4 +70,19 @@ public class UsersController {
             return null;
         }
     }
+
+    @PatchMapping("/{id}")
+public void updateUser(@PathVariable("id") Long id, @RequestBody Map<String, Object> updates) {
+    Users user = myService.listId(id);
+    if (user != null) {
+        ModelMapper m = new ModelMapper();
+        updates.forEach((key, value) -> {
+            if (key.equals("password")) {
+                value = WebSecurityConfig.passwordEncoder().encode((String) value);
+            }
+            m.map(value, user);
+        });
+        myService.insert(user);
+    }
+}
 }
