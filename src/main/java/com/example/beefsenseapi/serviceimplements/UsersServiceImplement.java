@@ -1,4 +1,6 @@
 package com.example.beefsenseapi.serviceimplements;
+import com.example.beefsenseapi.dtos.UsersDTO;
+import com.example.beefsenseapi.security.WebSecurityConfig;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +39,7 @@ public class UsersServiceImplement implements IUsersService {
 
     // Retrieve an items by ID from table
     @Override
-    public Users listId(Long idUsers){
+    public Users listId(Long idUsers) {
         return myRepository.findById(idUsers).orElse(new Users());
     }
 
@@ -50,5 +52,23 @@ public class UsersServiceImplement implements IUsersService {
     @Override
     public Users findByUsername(String username) {
         return myRepository.findByUsername(username);
+    }
+
+    @Override
+    @Transactional
+    public void patchUser(Long id, UsersDTO dto) {
+        Users user = myRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (dto.getUsername() != null) {
+            user.setUsername(dto.getUsername());
+            user.setPassword(WebSecurityConfig.passwordEncoder().encode(dto.getUsername()));
+        }
+
+        if (dto.getPassword() != null) {
+            user.setPassword(WebSecurityConfig.passwordEncoder().encode(dto.getPassword()));
+        }
+
+        user.setEnabled(dto.isEnabled());
+        myRepository.save(user);
     }
 }

@@ -1,4 +1,5 @@
 package com.example.beefsenseapi.controllers;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -7,6 +8,7 @@ import com.example.beefsenseapi.dtos.UsersDTO;
 import com.example.beefsenseapi.entities.Users;
 import com.example.beefsenseapi.security.WebSecurityConfig;
 import com.example.beefsenseapi.serviceinterfaces.IUsersService;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -29,13 +31,13 @@ public class UsersController {
 
     // Delete an item by ID on table
     @DeleteMapping("/{id}")
-    public void eliminar(@PathVariable("id")Long id){
+    public void eliminar(@PathVariable("id") Long id) {
         myService.delete(id);
     }
 
     // Retrieve an items by ID from table
     @GetMapping("/{id}")
-    public UsersDTO listarId(@PathVariable("id")Long id){
+    public UsersDTO listarId(@PathVariable("id") Long id) {
         ModelMapper m = new ModelMapper();
         UsersDTO myItem = m.map(myService.listId(id), UsersDTO.class);
         return myItem;
@@ -43,7 +45,7 @@ public class UsersController {
 
     // Retrieve all items from table
     @GetMapping
-    public List<UsersDTO> listar(){
+    public List<UsersDTO> listar() {
         return myService.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
             return m.map(x, UsersDTO.class);
@@ -59,6 +61,7 @@ public class UsersController {
         d.setPassword(WebSecurityConfig.passwordEncoder().encode(d.getPassword()));
         myService.insert(d);
     }
+
     @GetMapping("/buscar/{username}")
     public UsersDTO buscarPorUsername(@PathVariable("username") String username) {
         Users user = myService.findByUsername(username);
@@ -72,17 +75,7 @@ public class UsersController {
     }
 
     @PatchMapping("/{id}")
-public void updateUser(@PathVariable("id") Long id, @RequestBody Map<String, Object> updates) {
-    Users user = myService.listId(id);
-    if (user != null) {
-        ModelMapper m = new ModelMapper();
-        updates.forEach((key, value) -> {
-            if (key.equals("password")) {
-                value = WebSecurityConfig.passwordEncoder().encode((String) value);
-            }
-            m.map(value, user);
-        });
-        myService.insert(user);
+    public void patchUser(@PathVariable("id") Long id, @RequestBody UsersDTO dto) {
+        myService.patchUser(id, dto);
     }
-}
 }

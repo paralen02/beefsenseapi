@@ -61,4 +61,9 @@ public class OperariosController {
         OperariosDTO myItem = m.map(myService.findByUsername(username), OperariosDTO.class);
         return myItem;
     }
+
+    @PatchMapping("/{id}")
+    public void patchOperario(@PathVariable("id") Integer id, @RequestBody OperariosDTO dto) {
+        myService.patchOperario(id, dto);
+    }
 }

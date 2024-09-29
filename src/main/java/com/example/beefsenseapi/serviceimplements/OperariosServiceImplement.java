@@ -1,4 +1,6 @@
 package com.example.beefsenseapi.serviceimplements;
+import com.example.beefsenseapi.dtos.OperariosDTO;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import com.example.beefsenseapi.repositories.IOperariosRepository;
@@ -38,5 +40,19 @@ public class OperariosServiceImplement implements IOperariosService {
     @Override
     public Operarios findByUsername(String username) {
         return myRepository.findByUsername(username);
+    }
+    @Override
+    @Transactional
+    public void patchOperario(Integer id, OperariosDTO dto) {
+        Operarios operario = myRepository.findById(id).orElseThrow(() -> new RuntimeException("Operario not found"));
+
+        if (dto.getNombre() != null) {
+            operario.setNombre(dto.getNombre());
+        }
+        if (dto.getApellido() != null) {
+            operario.setApellido(dto.getApellido());
+        }
+
+        myRepository.save(operario);
     }
 }
