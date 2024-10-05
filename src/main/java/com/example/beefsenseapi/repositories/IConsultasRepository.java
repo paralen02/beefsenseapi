@@ -5,4 +5,4 @@ import com.example.beefsenseapi.entities.*;
 import java.util.List;
 
 @Repository
-public interface ISesionesRepository extends JpaRepository<Sesiones, Integer> { }
+public interface IConsultasRepository extends JpaRepository<Consultas, Integer> { }

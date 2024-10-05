@@ -1,24 +1,25 @@
 package com.example.beefsenseapi.controllers;
+import com.example.beefsenseapi.dtos.OperariosDTO;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import com.example.beefsenseapi.dtos.SesionesDTO;
-import com.example.beefsenseapi.entities.Sesiones;
-import com.example.beefsenseapi.serviceinterfaces.ISesionesService;
+import com.example.beefsenseapi.dtos.ConsultasDTO;
+import com.example.beefsenseapi.entities.Consultas;
+import com.example.beefsenseapi.serviceinterfaces.IConsultasService;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/sesiones")
-public class SesionesController {
+@RequestMapping("/consultas")
+public class ConsultasController {
     @Autowired
-    private ISesionesService myService;
+    private IConsultasService myService;
 
     // Add an item to table
     @PostMapping
-    public void registrar(@RequestBody SesionesDTO dto) {
+    public void registrar(@RequestBody ConsultasDTO dto) {
         ModelMapper m = new ModelMapper();
-        Sesiones myItem = m.map(dto, Sesiones.class);
+        Consultas myItem = m.map(dto, Consultas.class);
         myService.insert(myItem);
     }
 
@@ -30,26 +31,31 @@ public class SesionesController {
 
     // Retrieve an items by ID from table
     @GetMapping("/{id}")
-    public SesionesDTO listarId(@PathVariable("id")Integer id){
+    public ConsultasDTO listarId(@PathVariable("id")Integer id){
         ModelMapper m = new ModelMapper();
-        SesionesDTO myItem = m.map(myService.listId(id), SesionesDTO.class);
+        ConsultasDTO myItem = m.map(myService.listId(id), ConsultasDTO.class);
         return myItem;
     }
 
     // Retrieve all items from table
     @GetMapping
-    public List<SesionesDTO> listar(){
+    public List<ConsultasDTO> listar(){
         return myService.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
-            return m.map(x, SesionesDTO.class);
+            return m.map(x, ConsultasDTO.class);
         }).collect(Collectors.toList());
     }
 
     // (Exclusive to controller) Modify values on table
     @PutMapping
-    public void modificar(@RequestBody SesionesDTO dto) {
+    public void modificar(@RequestBody ConsultasDTO dto) {
         ModelMapper m = new ModelMapper();
-        Sesiones d = m.map(dto, Sesiones.class);
+        Consultas d = m.map(dto, Consultas.class);
         myService.insert(d);
+    }
+
+    @PatchMapping("/{id}")
+    public void patchConsulta(@PathVariable("id") Integer id, @RequestBody ConsultasDTO dto) {
+        myService.patchConsulta(id, dto);
     }
 }

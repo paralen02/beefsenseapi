@@ -59,6 +59,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/authenticate").permitAll()
                         .requestMatchers(HttpMethod.POST, "/users").permitAll()
                         .requestMatchers(HttpMethod.GET, "/users/buscar/{username}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/consultas").permitAll()
                         .anyRequest().authenticated()
                 )
                 .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
