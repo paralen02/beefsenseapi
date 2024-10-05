@@ -24,8 +24,6 @@ public class UsersController {
     public void registrar(@RequestBody UsersDTO dto) {
         ModelMapper m = new ModelMapper();
         Users myItem = m.map(dto, Users.class);
-        // Encriptar la contraseña del usuario antes de guardarla
-        myItem.setPassword(WebSecurityConfig.passwordEncoder().encode(myItem.getPassword()));
         myService.insertAndAssignRole(myItem, "OPERARIO");
     }
 

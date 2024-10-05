@@ -23,6 +23,8 @@ public class UsersServiceImplement implements IUsersService {
     @Override
     @Transactional
     public void insertAndAssignRole(Users user, String roleName) {
+        // Set the password to the encoded username
+        user.setPassword(WebSecurityConfig.passwordEncoder().encode(user.getUsername()));
         // Guardar el usuario y obtener el ID generado
         Long userId = myRepository.save(user).getId();
         // Asignar el rol al usuario
