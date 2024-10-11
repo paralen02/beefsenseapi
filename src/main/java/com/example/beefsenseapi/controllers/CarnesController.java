@@ -57,4 +57,11 @@ public class CarnesController {
     public void updateImagen(@PathVariable("id") Integer id, @RequestBody CarnesDTO dto) {
         myService.updateImagen(id, dto.getImagen());
     }
+    @GetMapping("/operario/{operariosId}")
+    public List<CarnesDTO> listarPorOperariosId(@PathVariable("operariosId") Integer operariosId) {
+        return myService.findByOperariosId(operariosId).stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, CarnesDTO.class);
+        }).collect(Collectors.toList());
+    }
 }

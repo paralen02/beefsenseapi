@@ -8,5 +8,5 @@ public interface ICarnesService {
     Carnes listId(int id);
     List<Carnes> list();
     void updateImagen(int id, String imagen); // Add this method
-
+    List<Carnes> findByOperariosId(int operariosId); // Add this method
 }

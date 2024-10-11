@@ -41,4 +41,8 @@ public class CarnesServiceImplement implements ICarnesService {
         carnes.setImagen(imagen);
         myRepository.save(carnes);
     }
+    @Override
+    public List<Carnes> findByOperariosId(int operariosId) {
+        return myRepository.findByOperariosId(operariosId); // Implement this method
+    }
 }
