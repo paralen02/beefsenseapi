@@ -30,10 +30,10 @@ RUN mkdir -p /app/src/main/resources/saved3/1
 COPY src/main/resources/saved3/1 /app/src/main/resources/saved3/1/
 
 # Copy the service account credentials to the specific path that Spring Boot expects
-COPY src/main/resources/beefsenseapp-f1d007644db8.json /app/src/main/resources/beefsenseapp-f1d007644db8.json
+COPY src/main/resources/beefsense2-9694befc1c02.json /app/src/main/resources/beefsense2-9694befc1c02.json
 
 # Set the environment variable for Google Application Credentials
-ENV GOOGLE_APPLICATION_CREDENTIALS=/app/src/main/resources/beefsenseapp-f1d007644db8.json
+ENV GOOGLE_APPLICATION_CREDENTIALS=/app/src/main/resources/beefsense2-9694befc1c02.json
 
 # Expose the application port
 EXPOSE 8080

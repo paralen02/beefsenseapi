@@ -19,9 +19,9 @@ import java.util.concurrent.TimeUnit;
 public class SignedUrlService {
 
     public String generateV4PutObjectSignedUrl(String fileName) throws IOException {
-        String projectId = "beefsenseapp";
-        String bucketName = "beefsensedatasetv1";
-        String keyFilePath = "/app/src/main/resources/beefsenseapp-f1d007644db8.json"; // Update this path
+        String projectId = "beefsense2";
+        String bucketName = "beefsensedataset2";
+        String keyFilePath = "/app/src/main/resources/beefsense2-9694befc1c02.json"; // Update this path
 
         // Load credentials from the service account key file
         ServiceAccountCredentials credentials = ServiceAccountCredentials.fromStream(new FileInputStream(keyFilePath));
