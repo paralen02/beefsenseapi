@@ -9,8 +9,7 @@ buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
-src/main/resources/beefsense2-9694befc1c02.json
-src/main/resources/beefsenseapp-f1d007644db8.json
+*.json
 # Eclipse m2e generated files
 # Eclipse Core
 .project
